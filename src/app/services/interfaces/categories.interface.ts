@@ -3,4 +3,6 @@ export interface Category {
   name: string;
   is_private: boolean;
   user_id: string;
+  created_at: string;
+  updated_at: string;
 }
