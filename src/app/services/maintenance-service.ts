@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
+import { Maintenance } from '../services/interfaces/maintenance.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -121,15 +122,4 @@ export class MaintenanceService {
         },
       });
   }
-}
-
-interface Maintenance {
-  id: string;
-  title: string;
-  category_id: string;
-  start_date: string;
-  repeat_interval: string;
-  reminder_days_before: number;
-  completed: boolean;
-  user_id: string;
 }

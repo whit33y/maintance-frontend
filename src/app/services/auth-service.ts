@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs';
+import { User } from './interfaces/auth.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -46,10 +47,4 @@ export class AuthService {
   isLoggedIn(): boolean {
     return !!this.getToken();
   }
-}
-
-export interface User {
-  id: string;
-  name: string;
-  email: string;
 }

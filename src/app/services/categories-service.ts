@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
+import { Category } from './interfaces/categories.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -101,11 +102,4 @@ export class CategoriesService {
       },
     });
   }
-}
-
-interface Category {
-  id: string;
-  name: string;
-  is_private: boolean;
-  user_id: string;
 }
