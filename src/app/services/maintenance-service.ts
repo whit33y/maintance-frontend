@@ -47,20 +47,54 @@ export class MaintenanceService {
     });
   }
 
+  loadMaintenanceByCategory(category_id: string) {
+    this.http.get<Maintenance[]>(`${this.PATH}/category/${category_id}}`).subscribe({
+      next: data => {
+        this.maintenance.set(data);
+      },
+      error: err => {
+        console.error('Failed to load maintenances', err);
+        this.error.set(err.message);
+      },
+      complete: () => {
+        console.log('Maintenances loaded', this.selectedMaintenance());
+      },
+    });
+  }
+
+  loadMaintenanceByStatus(is_completed: string) {
+    this.http.get<Maintenance[]>(`${this.PATH}/status/${is_completed}}`).subscribe({
+      next: data => {
+        this.maintenance.set(data);
+      },
+      error: err => {
+        console.error('Failed to load maintenances', err);
+        this.error.set(err.message);
+      },
+      complete: () => {
+        console.log('Maintenances loaded', this.selectedMaintenance());
+      },
+    });
+  }
+
   addMaintenance(
     title: string,
-    categoryId: string,
-    startDate: string,
-    repeatInterval: string,
-    reminderDaysBefore: number,
+    start_date: string,
+    repetition_unit: string,
+    repetition_value: number,
+    is_completed: boolean,
+    category_id: string,
+    notes?: string,
   ) {
     this.http
       .post<Maintenance>(this.PATH, {
         title,
-        categoryId,
-        startDate,
-        repeatInterval,
-        reminderDaysBefore,
+        start_date,
+        repetition_unit,
+        repetition_value,
+        is_completed,
+        category_id,
+        notes,
       })
       .subscribe({
         next: data => {
@@ -77,20 +111,22 @@ export class MaintenanceService {
   updateMaintenance(
     id: string,
     title: string,
-    categoryId: string,
-    startDate: string,
-    repeatInterval: string,
-    reminderDaysBefore: number,
-    completed: boolean,
+    start_date: string,
+    repetition_unit: string,
+    repetition_value: number,
+    is_completed: boolean,
+    category_id: string,
+    notes?: string,
   ) {
     this.http
       .put<Maintenance>(`${this.PATH}/${id}`, {
         title,
-        categoryId,
-        startDate,
-        repeatInterval,
-        reminderDaysBefore,
-        completed,
+        category_id,
+        start_date,
+        repetition_unit,
+        repetition_value,
+        is_completed,
+        notes,
       })
       .subscribe({
         next: data => {
